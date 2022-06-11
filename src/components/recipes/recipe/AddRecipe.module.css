@@ -1,0 +1,54 @@
+.formArea {
+	padding-top: 74px;
+	padding-bottom: 50px;
+}
+
+.gapBetween {
+	padding: 0 -30px;
+}
+
+.recipeForm {
+	padding: 13px 10px 13px 20px;
+	box-shadow: none;
+	border-radius: none;
+	line-height: 1.5;
+}
+
+.recipeForm label {
+	color: #333;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.recipeForm .form-group {
+	margin-bottom: 20px;
+}
+
+.recipeForm .form-group input {
+	height: 50px;
+}
+
+.recipeForm .form-group .form-control {
+	padding: 10px 20px;
+	font-size: 17px;
+	color: #333;
+}
+
+.recipeForm .form-group .form-control:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.recipeForm .recipePic li {
+	display: inline-block;
+	margin-left: -30px;
+}
+
+.recipeForm .btnAddRecipe {
+	padding: 12px 25px;
+	display: inline-block;
+	background-color: #00994d;
+	color: #fff;
+	font-weight: 600;
+	border-radius: 3px;
+}
