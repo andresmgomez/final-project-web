@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import classes from './FormRecipe.module.css';
 
 export const FormRecipeComponent = () => {
+	let navigate = useNavigate();
+
 	const [newRecipe, setNewRecipe] = useState({
 		name: '',
 		category: '',
@@ -20,7 +23,7 @@ export const FormRecipeComponent = () => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(newRecipe),
-		});
+		}).then(() => navigate('/recipes/detail-recipe'));
 	};
 
 	const handleRecipeFields = e => {

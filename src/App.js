@@ -1,13 +1,16 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AddRecipePage } from './pages/AddRecipe';
-// import { DetailRecipePage } from './pages/DetailRecipe';
+import { DetailRecipePage } from './pages/DetailRecipe';
 
 function App() {
 	return (
 		<>
-			<main>
-				<AddRecipePage />
-				{/* <DetailRecipePage /> */}
-			</main>
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<DetailRecipePage />} />
+					<Route path='/add-recipe' element={<AddRecipePage />} />
+				</Routes>
+			</BrowserRouter>
 		</>
 	);
 }
