@@ -1,12 +1,11 @@
-import './App.css';
+// import './App.css';
+import { BreadcrumbComponent } from './components/common/Breadcrumb/Breadcrumb';
 
 function App() {
 	return (
-		<div className='App'>
-			<header className='App-header'>
-				<h1>Welcome to my App</h1>
-			</header>
-		</div>
+		<header>
+			<BreadcrumbComponent />
+		</header>
 	);
 }
 
