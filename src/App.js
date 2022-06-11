@@ -1,12 +1,12 @@
-// import { AddRecipePage } from './pages/AddRecipe';
-import { DetailRecipePage } from './pages/DetailRecipe';
+import { AddRecipePage } from './pages/AddRecipe';
+// import { DetailRecipePage } from './pages/DetailRecipe';
 
 function App() {
 	return (
 		<>
 			<main>
-				{/* <AddRecipePage /> */}
-				<DetailRecipePage />
+				<AddRecipePage />
+				{/* <DetailRecipePage /> */}
 			</main>
 		</>
 	);
