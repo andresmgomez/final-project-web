@@ -1,7 +1,7 @@
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import classes from './AddRecipe.module.css';
+import classes from './FormRecipe.module.css';
 
-export const AddRecipeForm = () => {
+export const FormRecipeComponent = () => {
 	return (
 		<section className={`${classes.formArea}`}>
 			<Container>

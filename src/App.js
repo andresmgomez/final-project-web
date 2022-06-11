@@ -1,15 +1,12 @@
-import { BreadcrumbComponent } from './components/common/Breadcrumb/Breadcrumb';
-import { AddRecipeForm } from './components/recipes/recipe/AddRecipe';
-// import { SingleRecipe } from './components/recipes/recipe/SingleRecipe';
+// import { AddRecipePage } from './pages/AddRecipe';
+import { DetailRecipePage } from './pages/DetailRecipe';
 
 function App() {
 	return (
 		<>
-			<header>
-				<BreadcrumbComponent />
-			</header>
 			<main>
-				<AddRecipeForm />
+				{/* <AddRecipePage /> */}
+				<DetailRecipePage />
 			</main>
 		</>
 	);
