@@ -43,7 +43,7 @@ export const AddRecipeForm = () => {
 										<Form.Group className='mb-3'>
 											<Form.Control
 												type='text'
-												placeholder='Grocery Item: (carrot, apple, etc)'
+												placeholder='Food Item: (carrot, apple, etc)'
 											/>
 										</Form.Group>
 									</Col>
