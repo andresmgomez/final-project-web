@@ -17,13 +17,16 @@ export const FormRecipeComponent = () => {
 
 	const handleCreateRecipe = e => {
 		e.preventDefault();
-		fetch('https://final-project-api-hostin-13b05.web.app/recipes/', {
+		fetch('https://final-project-api-hostin-13b05.web.app/recipes', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(newRecipe),
-		}).then(() => navigate('/recipes/detail-recipe'));
+		})
+			.then(res => res.text())
+			.then(text => console.log(text))
+			.then(() => navigate('/'));
 	};
 
 	const handleRecipeFields = e => {
@@ -45,7 +48,6 @@ export const FormRecipeComponent = () => {
 								<Form.Label>Recipe Name</Form.Label>
 								<Form.Control
 									name='name'
-									value={newRecipe.name}
 									type='text'
 									placeholder='Carrot Orange Juice'
 									onChange={handleRecipeFields}
@@ -56,7 +58,6 @@ export const FormRecipeComponent = () => {
 								<Form.Label>Recipe Category</Form.Label>
 								<Form.Control
 									name='category'
-									value={newRecipe.category}
 									type='text'
 									placeholder='Breakfast'
 									onChange={handleRecipeFields}
@@ -66,7 +67,6 @@ export const FormRecipeComponent = () => {
 								<Form.Label>Quick Description</Form.Label>
 								<Form.Control
 									name='description'
-									value={newRecipe.description}
 									as='textarea'
 									placeholder='Write how has this recipe helped you in your daily routine'
 									onChange={handleRecipeFields}
