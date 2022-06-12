@@ -10,10 +10,17 @@ export const FormRecipeComponent = () => {
 		name: '',
 		category: '',
 		description: '',
-		picture: '',
-		ingredients: [],
-		instructions: '',
+		picture: null,
+		// ingredients,
+		instructions: [],
 	});
+
+	const [ingredients, setIngredients] = useState([
+		{
+			foodName: '',
+			foodMeasurement: '',
+		},
+	]);
 
 	const handleCreateRecipe = e => {
 		e.preventDefault();
@@ -24,8 +31,8 @@ export const FormRecipeComponent = () => {
 			},
 			body: JSON.stringify(newRecipe),
 		})
-			.then(res => res.text())
-			.then(text => console.log(text))
+			.then(res => res.json())
+			.then(res => console.log(res))
 			.then(() => navigate('/'));
 	};
 
@@ -33,6 +40,24 @@ export const FormRecipeComponent = () => {
 		const newRecipeValue =
 			e.target.name === 'picture' ? e.target.file : e.target.value;
 		setNewRecipe({ ...newRecipe, [e.target.name]: newRecipeValue });
+	};
+
+	const handleIngredientFields = (event, index) => {
+		const { name, value } = event.target;
+		const ingredientsList = [...ingredients];
+		ingredientsList[index][name] = value;
+		setIngredients(ingredientsList);
+	};
+
+	const handleAddIngredient = e => {
+		setIngredients([...ingredients, { [e.target.name]: e.target.value }]);
+		console.log(ingredients);
+	};
+
+	const handleRemoveIngredient = index => {
+		const currentIngredients = [...ingredients];
+		currentIngredients.splice(index, 1);
+		setIngredients(currentIngredients);
 	};
 
 	return (
@@ -50,6 +75,7 @@ export const FormRecipeComponent = () => {
 									name='name'
 									type='text'
 									placeholder='Carrot Orange Juice'
+									value={newRecipe.name}
 									onChange={handleRecipeFields}
 									required
 								/>
@@ -60,6 +86,7 @@ export const FormRecipeComponent = () => {
 									name='category'
 									type='text'
 									placeholder='Breakfast'
+									value={newRecipe.category}
 									onChange={handleRecipeFields}
 								/>
 							</Form.Group>
@@ -69,6 +96,7 @@ export const FormRecipeComponent = () => {
 									name='description'
 									as='textarea'
 									placeholder='Write how has this recipe helped you in your daily routine'
+									value={newRecipe.description}
 									onChange={handleRecipeFields}
 								/>
 							</Form.Group>
@@ -83,46 +111,78 @@ export const FormRecipeComponent = () => {
 									name='picture'
 									type='file'
 									multiple
+									value={newRecipe.picture}
 									onChange={handleRecipeFields}
 								/>
 							</Form.Group>
 							<Form.Group className='mb-3'>
 								<Form.Label>Ingredients</Form.Label>
-								<Row>
-									<Col lg={4}>
-										<Form.Group className='mb-3'>
-											<Form.Control
-												type='text'
-												placeholder='Food Item: (carrot, apple, etc)'
-												onChange={handleRecipeFields}
-											/>
-										</Form.Group>
-									</Col>
-									<Col lg={4}>
-										<Form.Group className='mb-3'>
-											<Form.Control
-												type='text'
-												placeholder='Category: (fruits, vegetables, etc)'
-												onChange={handleRecipeFields}
-											/>
-										</Form.Group>
-									</Col>
-									<Col lg={4}>
-										<Form.Group className='mb-3'>
-											<Form.Control
-												type='text'
-												placeholder='Measurement: (ounces, tbsps, etc)'
-												onChange={handleRecipeFields}
-											/>
-										</Form.Group>
-									</Col>
-								</Row>
+								{ingredients.map(index => {
+									return (
+										<Row>
+											<Col lg={4}>
+												<Form.Group className='mb-3'>
+													<Form.Control
+														name='foodName'
+														type='text'
+														placeholder='Food Item: (carrot, apple, etc)'
+														onChange={handleIngredientFields}
+													/>
+												</Form.Group>
+											</Col>
+											{/* <Col lg={4}>
+												<Form.Group className='mb-3'>
+													<Form.Control
+														type='text'
+														placeholder='Category: (fruits, vegetables, etc)'
+														onChange={handleRecipeFields}
+													/>
+												</Form.Group>
+											</Col> */}
+											<Col lg={4}>
+												<Form.Group className='mb-3'>
+													<Form.Control
+														name='foodMeasurement'
+														type='text'
+														placeholder='Measurement: (ounces, tbsps, etc)'
+														onChange={handleIngredientFields}
+													/>
+												</Form.Group>
+											</Col>
+											<Col lg={2}>
+												<Form.Group className='mb-3'>
+													{ingredients.length >= 1 && (
+														<Button
+															bsPrefix={`${classes.btnAddIngredient}`}
+															onClick={handleAddIngredient}
+														>
+															Add
+														</Button>
+													)}
+												</Form.Group>
+											</Col>
+											<Col lg={2}>
+												<Form.Group clasName='mb-3'>
+													{ingredients.length - 1 === index && (
+														<Button
+															bsPrefix={`${classes.btnRemoveIngredient}`}
+															onClick={() => handleRemoveIngredient(index)}
+														>
+															Remove
+														</Button>
+													)}
+												</Form.Group>
+											</Col>
+										</Row>
+									);
+								})}
 							</Form.Group>
 							<Form.Group className='mb-3'>
 								<Form.Label>Instructions</Form.Label>
 								<Form.Control
 									as='textarea'
 									style={{ height: '200px' }}
+									value={newRecipe.instructions[0]}
 									onChange={handleRecipeFields}
 								/>
 							</Form.Group>

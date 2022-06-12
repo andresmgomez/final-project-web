@@ -57,6 +57,12 @@ export const SingleRecipeComponent = ({ recipe }) => {
 									<p className={`${classes.recipeContent}`}>
 										{recipe.instructions[4]}
 									</p>
+									<p className={`${classes.recipeContent}`}>
+										{recipe.instructions[5]}
+									</p>
+									<p className={`${classes.recipeContent}`}>
+										{recipe.instructions[6]}
+									</p>
 								</div>
 							</div>
 						</Col>
