@@ -117,7 +117,7 @@ export const FormRecipeComponent = () => {
 							</Form.Group>
 							<Form.Group className='mb-3'>
 								<Form.Label>Ingredients</Form.Label>
-								{ingredients.map(index => {
+								{ingredients.map((singleIngredient, index) => {
 									return (
 										<Row>
 											<Col lg={4}>
