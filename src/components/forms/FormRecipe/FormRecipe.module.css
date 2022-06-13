@@ -44,6 +44,11 @@
 	margin-left: -30px;
 }
 
+.recipeForm .recipePic img {
+	width: 125px;
+	height: 180px;
+}
+
 .recipeForm .btnAddRecipe {
 	padding: 12px 25px;
 	display: inline-block;

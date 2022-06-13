@@ -10,11 +10,12 @@ export const FormRecipeComponent = () => {
 		name: '',
 		category: '',
 		description: '',
-		picture: null,
+		picture: '',
 		// ingredients,
 		instructions: [],
 	});
 
+	const [previewPicture, setPreviewPicture] = useState(null);
 	const [ingredients, setIngredients] = useState([
 		{
 			foodName: '',
@@ -36,10 +37,24 @@ export const FormRecipeComponent = () => {
 			.then(() => navigate('/'));
 	};
 
+	const handlePictureField = e => {
+		if (e.target.files[0]) {
+			const readRawPicture = new FileReader();
+			readRawPicture.addEventListener('load', () => {
+				setPreviewPicture(readRawPicture.result);
+			});
+			readRawPicture.readAsDataURL(e.target.files[0]);
+		}
+	};
+
 	const handleRecipeFields = e => {
 		const newRecipeValue =
 			e.target.name === 'picture' ? e.target.file : e.target.value;
-		setNewRecipe({ ...newRecipe, [e.target.name]: newRecipeValue });
+		setNewRecipe({
+			...newRecipe,
+			[e.target.name]: newRecipeValue,
+			ingredients,
+		});
 	};
 
 	const handleIngredientFields = (event, index) => {
@@ -104,22 +119,21 @@ export const FormRecipeComponent = () => {
 								<Form.Label>Upload a Pic</Form.Label>
 								<ul className={`${classes.recipePic}`}>
 									<li>
-										<img src='https://via.placeholder.com/138x130' />
+										<img src={previewPicture} />
 									</li>
 								</ul>
 								<Form.Control
 									name='picture'
 									type='file'
-									multiple
 									value={newRecipe.picture}
-									onChange={handleRecipeFields}
+									onChange={handlePictureField}
 								/>
 							</Form.Group>
 							<Form.Group className='mb-3'>
 								<Form.Label>Ingredients</Form.Label>
 								{ingredients.map((singleIngredient, index) => {
 									return (
-										<Row>
+										<Row key={index}>
 											<Col lg={4}>
 												<Form.Group className='mb-3'>
 													<Form.Control
