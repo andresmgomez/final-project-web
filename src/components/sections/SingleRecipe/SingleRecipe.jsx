@@ -25,29 +25,17 @@ export const SingleRecipeComponent = ({ recipe }) => {
 										<Col sm={12} lg={12}>
 											<div className={`${classes.cardIngredients} text-center`}>
 												<h3 className={`${classes.cardTitle}`}>Ingredients</h3>
-												{}
 												<InputGroup
 													bsPrefix={`${classes.cardCheckbox}`}
 													className='mb-3'
 												>
-													<Form.Control
-														value={JSON.stringify(recipe.ingredients[0])}
-													/>
-													<Form.Control
-														value={JSON.stringify(recipe.ingredients[1])}
-													/>
-													<Form.Control
-														value={JSON.stringify(recipe.ingredients[2])}
-													/>
-													<Form.Control
-														value={JSON.stringify(recipe.ingredients[3])}
-													/>
-													<Form.Control
-														value={JSON.stringify(recipe.ingredients[4])}
-													/>
-													<Form.Control
-														value={JSON.stringify(recipe.ingredients[5])}
-													/>
+													{recipe.ingredients.map(ingredient => {
+														return (
+															<Form.Control
+																value={JSON.stringify(ingredient)}
+															/>
+														);
+													})}
 												</InputGroup>
 											</div>
 										</Col>
