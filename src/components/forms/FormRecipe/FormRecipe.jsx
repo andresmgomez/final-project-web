@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import classes from './FormRecipe.module.css';
 
+const emptyIngredients = {
+	foodName: '',
+	foodMeasurement: '',
+};
+
 export const FormRecipeComponent = () => {
 	let navigate = useNavigate();
 
@@ -11,26 +16,23 @@ export const FormRecipeComponent = () => {
 		category: '',
 		description: '',
 		picture: '',
-		// ingredients,
+		// ingredients: [],
 		instructions: [],
 	});
 
 	const [previewPicture, setPreviewPicture] = useState(null);
-	const [ingredients, setIngredients] = useState([
-		{
-			foodName: '',
-			foodMeasurement: '',
-		},
-	]);
+	const [ingredients, setIngredients] = useState([emptyIngredients]);
 
 	const handleCreateRecipe = e => {
 		e.preventDefault();
+		let _newRecipe = newRecipe;
+		_newRecipe.ingredients = ingredients;
 		fetch('https://final-project-api-hostin-13b05.web.app/recipes', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(newRecipe),
+			body: JSON.stringify(_newRecipe),
 		})
 			.then(res => res.json())
 			.then(res => console.log(res))
@@ -57,16 +59,16 @@ export const FormRecipeComponent = () => {
 		});
 	};
 
-	const handleIngredientFields = (event, index) => {
-		const { name, value } = event.target;
-		const ingredientsList = [...ingredients];
-		ingredientsList[index][name] = value;
+	const handleIngredientFields = (event, fieldName, index) => {
+		// const { name, value } = event.target;
+		let ingredientsList = ingredients;
+		ingredientsList[index][fieldName] = event.target.value;
 		setIngredients(ingredientsList);
+		console.log(ingredientsList);
 	};
 
-	const handleAddIngredient = e => {
-		setIngredients([...ingredients, { [e.target.name]: e.target.value }]);
-		console.log(ingredients);
+	const handleAddIngredient = () => {
+		setIngredients([...ingredients, emptyIngredients]);
 	};
 
 	const handleRemoveIngredient = index => {
@@ -132,47 +134,48 @@ export const FormRecipeComponent = () => {
 							<Form.Group className='mb-3'>
 								<Form.Label>Ingredients</Form.Label>
 								{ingredients.map((singleIngredient, index) => {
+									const _index = index;
+									console.log(singleIngredient);
 									return (
 										<Row key={index}>
 											<Col lg={4}>
 												<Form.Group className='mb-3'>
 													<Form.Control
 														name='foodName'
+														// value={ingredients[index].foodName}
 														type='text'
 														placeholder='Food Item: (carrot, apple, etc)'
-														onChange={handleIngredientFields}
+														onChange={e =>
+															handleIngredientFields(e, 'foodName', _index)
+														}
 													/>
 												</Form.Group>
 											</Col>
-											{/* <Col lg={4}>
-												<Form.Group className='mb-3'>
-													<Form.Control
-														type='text'
-														placeholder='Category: (fruits, vegetables, etc)'
-														onChange={handleRecipeFields}
-													/>
-												</Form.Group>
-											</Col> */}
 											<Col lg={4}>
 												<Form.Group className='mb-3'>
 													<Form.Control
 														name='foodMeasurement'
+														// value={ingredients[_index].foodMeasurement}
 														type='text'
 														placeholder='Measurement: (ounces, tbsps, etc)'
-														onChange={handleIngredientFields}
+														onChange={e =>
+															handleIngredientFields(
+																e,
+																'foodMeasurement',
+																_index
+															)
+														}
 													/>
 												</Form.Group>
 											</Col>
 											<Col lg={2}>
 												<Form.Group className='mb-3'>
-													{ingredients.length >= 1 && (
-														<Button
-															bsPrefix={`${classes.btnAddIngredient}`}
-															onClick={handleAddIngredient}
-														>
-															Add
-														</Button>
-													)}
+													<Button
+														bsPrefix={`${classes.btnAddIngredient}`}
+														onClick={handleAddIngredient}
+													>
+														Add
+													</Button>
 												</Form.Group>
 											</Col>
 											<Col lg={2}>
