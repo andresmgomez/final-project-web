@@ -30,11 +30,22 @@ export const SingleRecipeComponent = ({ recipe }) => {
 													className='mb-3'
 												>
 													{recipe.ingredients.map(ingredient => {
-														return (
-															<Form.Control
-																value={JSON.stringify(ingredient)}
-															/>
+														let recipeIngredients = [];
+														const foodName = JSON.stringify(
+															ingredient['foodName']
 														);
+														const foodMeasure = JSON.stringify(
+															ingredient['foodMeasurement']
+														);
+														recipeIngredients.push(foodName, ' ', foodMeasure);
+														// const { foodName, foodMeasurement } =
+														// 	recipe.ingredients[index];
+														// const recipeIngredient = {
+														// 	foodName,
+														// 	foodMeasurement,
+														// };
+
+														return <Form.Control value={recipeIngredients} />;
 													})}
 												</InputGroup>
 											</div>
@@ -43,27 +54,17 @@ export const SingleRecipeComponent = ({ recipe }) => {
 								</div>
 								<div className={classes.recipeInstructions}>
 									<h3>Instructions</h3>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[0]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[1]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[2]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[3]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[4]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[5]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[6]}
-									</p>
+									{recipe.instructions.map(instruction => {
+										const inst = JSON.stringify(instruction['foodInstruction']);
+										return (
+											<div
+												className={`${classes.recipeContent}`}
+												key={instruction}
+											>
+												<p>{inst}</p>
+											</div>
+										);
+									})}
 								</div>
 							</div>
 						</Col>

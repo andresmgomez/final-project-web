@@ -3,17 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import classes from './FormRecipe.module.css';
 
+import { emptyIngredients, dynamicArrayFields } from '../functions/arrayFields';
+
 export const FormRecipeComponent = () => {
 	let navigate = useNavigate();
-
-	const emptyIngredients = {
-		foodName: '',
-		foodMeasurement: '',
-	};
-
-	const emptyInstructions = {
-		foodInstruction: '',
-	};
 
 	const [newRecipe, setNewRecipe] = useState({
 		name: '',
@@ -26,7 +19,7 @@ export const FormRecipeComponent = () => {
 
 	const [previewPicture, setPreviewPicture] = useState(null);
 	const [ingredients, setIngredients] = useState([emptyIngredients]);
-	const [instructions, setInstructions] = useState([emptyInstructions]);
+	const [instructions, setInstructions] = useState([]);
 
 	const handleCreateRecipe = e => {
 		e.preventDefault();
@@ -61,14 +54,34 @@ export const FormRecipeComponent = () => {
 		setNewRecipe({
 			...newRecipe,
 			[e.target.name]: newRecipeValue,
-			ingredients,
 		});
 	};
 
-	const handleIngredientFields = (e, name, index) => {
+	const handleIngredientFields = (index, fieldName, e) => {
 		let ingredientsList = ingredients;
-		ingredientsList[index][name] = e.target.value;
+		dynamicArrayFields(ingredientsList, index, fieldName, e);
 		setIngredients(ingredientsList);
+	};
+
+	// const handleIngredientFields = (event, fieldName, index) => {
+	// 	// const { name, value } = event.target;
+	// 	let ingredientsList = ingredients;
+	// 	ingredientsList[index][fieldName] = event.target.value;
+	// 	setIngredients(ingredientsList);
+	// 	console.log(ingredientsList);
+	// };
+
+	const handleInstructions = e => {
+		let instructionsList = instructions;
+		instructionsList = instructions.split(',');
+		console.log(instructionsList);
+
+		setInstructions({
+			instructionsList,
+			// ...instructions,
+			// [e.target.name]: e.target.value,
+			// instructionsList,
+		});
 	};
 
 	const handleAddIngredient = () => {
@@ -79,26 +92,6 @@ export const FormRecipeComponent = () => {
 		const currentIngredients = [...ingredients];
 		currentIngredients.splice(index, 1);
 		setIngredients(currentIngredients);
-	};
-
-	const handleInstructionFields = e => {
-		let instructionsList = instructions;
-		instructionsList = e.target.value;
-		console.log(instructionsList);
-
-		if (e.onKeyUp === 13) {
-			const newInstruction = instructionsList.split(',');
-			instructionsList.push(newInstruction);
-		}
-
-		// const recipeIngredients = emptyInstructions({
-		// 	foodInstruction: instructionsList,
-		// });
-
-		setInstructions({
-			...instructions,
-			emptyInstructions,
-		});
 	};
 
 	return (
@@ -157,14 +150,16 @@ export const FormRecipeComponent = () => {
 							</Form.Group>
 							<Form.Group className='mb-3'>
 								<Form.Label>Ingredients</Form.Label>
-								{ingredients.map((ingredient, index) => {
+								{ingredients.map((singleIngredient, index) => {
 									const _index = index;
+									console.log(singleIngredient);
 									return (
 										<Row key={index}>
 											<Col lg={4}>
 												<Form.Group className='mb-3'>
 													<Form.Control
 														name='foodName'
+														// value={ingredients[index].foodName}
 														type='text'
 														placeholder='Food Item: (carrot, apple, etc)'
 														onChange={e =>
@@ -177,13 +172,14 @@ export const FormRecipeComponent = () => {
 												<Form.Group className='mb-3'>
 													<Form.Control
 														name='foodMeasurement'
+														// value={ingredients[_index].foodMeasurement}
 														type='text'
 														placeholder='Measurement: (ounces, tbsps, etc)'
 														onChange={e =>
 															handleIngredientFields(
 																e,
 																'foodMeasurement',
-																index
+																_index
 															)
 														}
 													/>
@@ -201,12 +197,14 @@ export const FormRecipeComponent = () => {
 											</Col>
 											<Col lg={2}>
 												<Form.Group clasName='mb-3'>
-													<Button
-														bsPrefix={`${classes.btnRemoveIngredient}`}
-														onClick={() => handleRemoveIngredient(index)}
-													>
-														Remove
-													</Button>
+													{ingredients.length - 1 === index && (
+														<Button
+															bsPrefix={`${classes.btnRemoveIngredient}`}
+															onClick={() => handleRemoveIngredient(index)}
+														>
+															Remove
+														</Button>
+													)}
 												</Form.Group>
 											</Col>
 										</Row>
@@ -218,7 +216,7 @@ export const FormRecipeComponent = () => {
 								<Form.Control
 									as='textarea'
 									style={{ height: '200px' }}
-									onChange={e => handleInstructionFields(e)}
+									onChange={handleRecipeFields}
 								/>
 							</Form.Group>
 							<Button
