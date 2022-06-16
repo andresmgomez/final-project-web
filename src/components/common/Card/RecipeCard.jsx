@@ -13,15 +13,15 @@ export const RecipeCardComponent = ({ recipe }) => {
 							width={530}
 							height={390}
 							src='https://via.placeholder.com/530x390'
-							onClick={() => navigate(`/detail-recipe/${recipe.id}`)}
+							onClick={() => navigate(`/recipes/${recipe._id}`)}
 						/>
 						<div className={`${classes.singleRecipe}`}>
-							<span className={`${classes.recipeCategory}`}>Breakfast</span>
-							<h3>Carrot Orange Juice</h3>
+							<span className={`${classes.recipeCategory}`}>
+								{recipe.category || 'Breakfast'}
+							</span>
+							<h3>{recipe.name}</h3>
 							<p className={`${classes.recipeDescription}`}>
-								This carrot orange juice has just enough sweetness to give your
-								taste buds that awakening, but not so sweet you feel like you’re
-								betraying your weight loss regime
+								{recipe.description}
 							</p>
 						</div>
 					</Figure>

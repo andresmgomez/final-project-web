@@ -1,14 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AddRecipePage } from './pages/AddRecipe';
-import { DisplaRecipesPage } from './pages/DisplayRecipes';
-// import { DetailRecipePage } from './pages/DetailRecipe';
+import { DetailRecipePage } from './pages/DetailRecipe';
+import { DisplayRecipesPage } from './pages/DisplayRecipes';
 
 function App() {
 	return (
 		<>
 			<BrowserRouter>
 				<Routes>
-					<Route path='/' element={<DisplaRecipesPage />} />
+					<Route path='/' element={<DisplayRecipesPage />} />
+					<Route path='/recipes/:recipeId' element={<DetailRecipePage />} />
 					<Route path='/add-recipe' element={<AddRecipePage />} />
 				</Routes>
 			</BrowserRouter>

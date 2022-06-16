@@ -1,26 +1,27 @@
 import { useEffect, useState } from 'react';
-import { BreadcrumbComponent } from '../components/common/Breadcrumb/Breadcrumb';
+import { Link, useParams } from 'react-router-dom';
+// import { BreadcrumbComponent } from '../components/common/Breadcrumb/Breadcrumb';
 import { SingleRecipeComponent } from '../components/sections/SingleRecipe/SingleRecipe';
 
 export const DetailRecipePage = () => {
-	const [recipes, setRecipes] = useState();
+	const { recipeId } = useParams();
+	const [recipe, setRecipe] = useState();
 
 	useEffect(() => {
-		fetch('https://final-project-api-hostin-13b05.web.app/recipes')
+		fetch(`https://final-project-api-hostin-13b05.web.app/recipes/${recipeId}`)
 			.then(res => res.json())
-			.then(data => setRecipes(data))
+			.then(data => setRecipe(data))
+			.then(data => console.log(data))
 			.catch(err => console.error(err));
-	}, []);
+	}, [recipeId]);
 
 	return (
 		<>
-			<BreadcrumbComponent title='Display a Recipe' task='Detail Recipe' />
-			{!recipes ? (
+			<Link to='/'>Go Back</Link>
+			{!recipe ? (
 				<h3 className='text-center mt-3'>Please Wait...</h3>
 			) : (
-				recipes?.map(recipe => {
-					return <SingleRecipeComponent recipe={recipe} />;
-				})
+				<SingleRecipeComponent recipe={recipe} recipeId={recipeId} />
 			)}
 		</>
 	);

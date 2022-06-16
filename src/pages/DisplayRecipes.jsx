@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { BreadcrumbComponent } from '../components/common/Breadcrumb/Breadcrumb';
 import { RecipeCardComponent } from '../components/common/Card/RecipeCard';
 
-export const DisplaRecipesPage = () => {
+export const DisplayRecipesPage = () => {
 	const [recipes, setRecipes] = useState();
 
 	useEffect(() => {
@@ -28,9 +28,7 @@ export const DisplaRecipesPage = () => {
 								<h3 className='text-center mt-3'>Please Wait...</h3>
 							) : (
 								recipes?.map(recipe => {
-									return (
-										<RecipeCardComponent recipe={recipe} key={recipe.id} />
-									);
+									return <RecipeCardComponent recipe={recipe} />;
 								})
 							)}
 						</Col>
