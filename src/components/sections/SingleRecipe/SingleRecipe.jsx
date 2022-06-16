@@ -54,17 +54,24 @@ export const SingleRecipeComponent = ({ recipe }) => {
 								</div>
 								<div className={classes.recipeInstructions}>
 									<h3>Instructions</h3>
-									{recipe.instructions.map(instruction => {
-										const inst = JSON.stringify(instruction['foodInstruction']);
-										return (
-											<div
-												className={`${classes.recipeContent}`}
-												key={instruction}
-											>
-												<p>{inst}</p>
-											</div>
-										);
-									})}
+									<p className={`${classes.recipeContent}`}>
+										{recipe.instructions[1]}
+									</p>
+									<p className={`${classes.recipeContent}`}>
+										{recipe.instructions[2]}
+									</p>
+									<p className={`${classes.recipeContent}`}>
+										{recipe.instructions[3]}
+									</p>
+									<p className={`${classes.recipeContent}`}>
+										{recipe.instructions[4]}
+									</p>
+									<p className={`${classes.recipeContent}`}>
+										{recipe.instructions[5]}
+									</p>
+									<p className={`${classes.recipeContent}`}>
+										{recipe.instructions[6]}
+									</p>
 								</div>
 							</div>
 						</Col>

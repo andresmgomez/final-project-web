@@ -1,0 +1,38 @@
+.recipeCard {
+	background-color: #f5f5f5;
+	margin-bottom: 48px;
+}
+
+.recipeCard .recipeImage {
+	margin-bottom: 0;
+	overflow: hidden;
+}
+
+.recipeCard:hover .recipeImage img {
+	cursor: pointer;
+	transition: all 0.3s ease-out;
+}
+
+.recipeCard .recipeImage a {
+	display: block;
+}
+
+.singleRecipe {
+	padding: 25px 30px 15px 30px;
+	text-align: center;
+}
+
+.singleRecipe .recipeCategory {
+	margin-bottom: 8px;
+	color: #ffae00;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.singleRecipe .recipeDescription {
+	max-width: 450px;
+	margin-bottom: 15px;
+	color: #6c6c6c;
+	font-size: 18px;
+	text-align: left;
+}
