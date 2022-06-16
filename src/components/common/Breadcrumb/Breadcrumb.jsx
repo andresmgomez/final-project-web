@@ -1,4 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import classes from './Breadcrumb.module.css';
 
 export const BreadcrumbComponent = props => {
@@ -10,10 +11,10 @@ export const BreadcrumbComponent = props => {
 						<div className={`${classes.breadcrumbTitle}`}>
 							<h1>{props.title}</h1>
 							<ul>
+								<li>{props.prev}</li>
 								<li>
-									<a href='index.html'>Home</a>
+									<Link to='/add-recipe'>{props.next}</Link>
 								</li>
-								<li>{props.task}</li>
 							</ul>
 						</div>
 					</Col>

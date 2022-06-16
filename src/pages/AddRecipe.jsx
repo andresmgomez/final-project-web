@@ -4,7 +4,11 @@ import { FormRecipeComponent } from '../components/forms/FormRecipe/FormRecipe';
 export const AddRecipePage = () => {
 	return (
 		<>
-			<BreadcrumbComponent title='Make a new Recipe' task='Add Recipe' />
+			<BreadcrumbComponent
+				title='Make a new Recipe'
+				prev='Display Recipes'
+				next='Add Recipe'
+			/>
 			<FormRecipeComponent />
 		</>
 	);

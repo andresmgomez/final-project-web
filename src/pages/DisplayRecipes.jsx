@@ -15,7 +15,11 @@ export const DisplaRecipesPage = () => {
 
 	return (
 		<>
-			<BreadcrumbComponent title='List of Recipes' task='Display Recipes' />
+			<BreadcrumbComponent
+				title='List of Recipes'
+				prev='Display Recipes'
+				next='Add Recipe'
+			/>
 			<section>
 				<Container>
 					<Row>
