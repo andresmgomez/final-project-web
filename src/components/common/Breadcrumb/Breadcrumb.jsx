@@ -11,10 +11,8 @@ export const BreadcrumbComponent = props => {
 						<div className={`${classes.breadcrumbTitle}`}>
 							<h1>{props.title}</h1>
 							<ul>
-								<li>{props.prev}</li>
-								<li>
-									<Link to='/add-recipe'>{props.next}</Link>
-								</li>
+								<li>{props.current}</li>
+								<Link to={props.link}>{props.page}</Link>
 							</ul>
 						</div>
 					</Col>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+
 import { BreadcrumbComponent } from '../components/common/Breadcrumb/Breadcrumb';
 import { RecipeCardComponent } from '../components/common/Card/RecipeCard';
 
@@ -17,8 +18,9 @@ export const DisplayRecipesPage = () => {
 		<>
 			<BreadcrumbComponent
 				title='List of Recipes'
-				prev='Display Recipes'
-				next='Add Recipe'
+				current='Display Recipes'
+				link='/add-recipe'
+				page='Add Recipe'
 			/>
 			<section>
 				<Container>

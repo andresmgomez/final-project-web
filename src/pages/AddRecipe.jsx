@@ -6,8 +6,9 @@ export const AddRecipePage = () => {
 		<>
 			<BreadcrumbComponent
 				title='Make a new Recipe'
-				prev='Display Recipes'
-				next='Add Recipe'
+				current='Add Recipe'
+				link='/'
+				page='Recipes Page'
 			/>
 			<FormRecipeComponent />
 		</>

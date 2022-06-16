@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-// import { BreadcrumbComponent } from '../components/common/Breadcrumb/Breadcrumb';
+import { useParams } from 'react-router-dom';
+import { BreadcrumbComponent } from '../components/common/Breadcrumb/Breadcrumb';
 import { SingleRecipeComponent } from '../components/sections/SingleRecipe/SingleRecipe';
 
 export const DetailRecipePage = () => {
@@ -17,7 +17,12 @@ export const DetailRecipePage = () => {
 
 	return (
 		<>
-			<Link to='/'>Go Back</Link>
+			<BreadcrumbComponent
+				title='Details of Recipe'
+				current='Recipe Info'
+				link='/'
+				page='Recipes Page'
+			/>
 			{!recipe ? (
 				<h3 className='text-center mt-3'>Please Wait...</h3>
 			) : (
