@@ -54,7 +54,14 @@ export const SingleRecipeComponent = ({ recipe, recipeId }) => {
 								</div>
 								<div className={classes.recipeInstructions}>
 									<h3>Instructions</h3>
-									<p className={`${classes.recipeContent}`}>
+									{recipe.instructions.map(instruction => {
+										return (
+											<p className={`${classes.recipeContent}`}>
+												{instruction}
+											</p>
+										);
+									})}
+									{/* <p className={`${classes.recipeContent}`}>
 										{recipe.instructions[1]}
 									</p>
 									<p className={`${classes.recipeContent}`}>
@@ -71,7 +78,7 @@ export const SingleRecipeComponent = ({ recipe, recipeId }) => {
 									</p>
 									<p className={`${classes.recipeContent}`}>
 										{recipe.instructions[6]}
-									</p>
+									</p> */}
 								</div>
 							</div>
 						</Col>

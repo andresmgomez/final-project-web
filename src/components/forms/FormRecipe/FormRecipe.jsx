@@ -11,9 +11,9 @@ export const FormRecipeComponent = () => {
 		foodMeasurement: '',
 	};
 
-	const emptyInstructions = {
-		foodInstruction: '',
-	};
+	// const emptyInstructions = {
+	// 	foodInstruction: '',
+	// };
 
 	const [newRecipe, setNewRecipe] = useState({
 		name: '',
@@ -26,13 +26,22 @@ export const FormRecipeComponent = () => {
 
 	const [previewPicture, setPreviewPicture] = useState(null);
 	const [ingredients, setIngredients] = useState([emptyIngredients]);
-	const [instructions, setInstructions] = useState([emptyInstructions]);
+	let [instructions, setInstructions] = useState('');
 
 	const handleCreateRecipe = e => {
 		e.preventDefault();
 		let _newRecipe = newRecipe;
 		_newRecipe.ingredients = ingredients;
-		_newRecipe.instructions = instructions;
+		_newRecipe.instructions = instructions.split('\n');
+
+		// let instructionsList = [];
+		// //
+		// if (e.onKeyUp === 13) {
+		// 	const newInstruction = handleInstructionsArea(e).split(',');
+		// 	instructionsList.push(newInstruction);
+		// 	console.log(newInstruction);
+		// }
+
 		fetch('https://final-project-api-hostin-13b05.web.app/recipes', {
 			method: 'POST',
 			headers: {
@@ -58,10 +67,12 @@ export const FormRecipeComponent = () => {
 	const handleRecipeFields = e => {
 		const newRecipeValue =
 			e.target.name === 'picture' ? e.target.file : e.target.value;
+		instructions = handleInstructionFields(e);
 		setNewRecipe({
 			...newRecipe,
 			[e.target.name]: newRecipeValue,
 			ingredients,
+			instructions,
 		});
 	};
 
@@ -81,24 +92,21 @@ export const FormRecipeComponent = () => {
 		setIngredients(currentIngredients);
 	};
 
-	const handleInstructionFields = e => {
-		let instructionsList = instructions;
-		instructionsList = e.target.value;
-		console.log(instructionsList);
+	const handleInstructionsArea = e => {
+		setInstructions(e.target.value);
+	};
 
-		if (e.onKeyUp === 13) {
-			const newInstruction = instructionsList.split(',');
-			instructionsList.push(newInstruction);
-		}
-
-		// const recipeIngredients = emptyInstructions({
-		// 	foodInstruction: instructionsList,
-		// });
-
-		setInstructions({
-			...instructions,
-			emptyInstructions,
-		});
+	const handleInstructionFields = (e, name, index) => {
+		// let instructionsList = emptyInstructions;
+		// instructionsList = e.target.value;
+		// let instructionsList = emptyInstructions;
+		// instructionsList[index][name] = e.target.value;
+		// if (e.onKeyUp === 13) {
+		// 	const newInstruction = instructionsList.split(',');
+		// 	instructionsList.push(newInstruction);
+		// 	console.log(newInstruction);
+		// }
+		// setInstructions(instructionsList);
 	};
 
 	return (
@@ -116,7 +124,6 @@ export const FormRecipeComponent = () => {
 									name='name'
 									type='text'
 									placeholder='Carrot Orange Juice'
-									value={newRecipe.name}
 									onChange={handleRecipeFields}
 									required
 								/>
@@ -127,7 +134,6 @@ export const FormRecipeComponent = () => {
 									name='category'
 									type='text'
 									placeholder='Breakfast'
-									value={newRecipe.category}
 									onChange={handleRecipeFields}
 								/>
 							</Form.Group>
@@ -137,7 +143,6 @@ export const FormRecipeComponent = () => {
 									name='description'
 									as='textarea'
 									placeholder='Write how has this recipe helped you in your daily routine'
-									value={newRecipe.description}
 									onChange={handleRecipeFields}
 								/>
 							</Form.Group>
@@ -218,7 +223,8 @@ export const FormRecipeComponent = () => {
 								<Form.Control
 									as='textarea'
 									style={{ height: '200px' }}
-									onChange={e => handleInstructionFields(e)}
+									// onChange={e => handleInstructionFields(e)}
+									onChange={handleInstructionsArea}
 								/>
 							</Form.Group>
 							<Button
