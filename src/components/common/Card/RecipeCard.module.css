@@ -1,5 +1,6 @@
 .recipeCard {
 	background-color: #f5f5f5;
+	margin-top: 80px;
 	margin-bottom: 48px;
 }
 
@@ -10,7 +11,6 @@
 
 .recipeCard:hover .recipeImage img {
 	cursor: pointer;
-	transition: all 0.3s ease-out;
 }
 
 .recipeCard .recipeImage a {
@@ -23,7 +23,7 @@
 }
 
 .singleRecipe .recipeCategory {
-	margin-bottom: 8px;
+	padding-bottom: 8px;
 	color: #ffae00;
 	font-size: 16px;
 	font-weight: 600;
@@ -31,7 +31,7 @@
 
 .singleRecipe .recipeDescription {
 	max-width: 450px;
-	margin-bottom: 15px;
+	margin: 15px auto;
 	color: #6c6c6c;
 	font-size: 18px;
 	text-align: left;

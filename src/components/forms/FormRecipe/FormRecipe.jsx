@@ -11,10 +11,6 @@ export const FormRecipeComponent = () => {
 		foodMeasurement: '',
 	};
 
-	// const emptyInstructions = {
-	// 	foodInstruction: '',
-	// };
-
 	const [newRecipe, setNewRecipe] = useState({
 		name: '',
 		category: '',
@@ -33,14 +29,6 @@ export const FormRecipeComponent = () => {
 		let _newRecipe = newRecipe;
 		_newRecipe.ingredients = ingredients;
 		_newRecipe.instructions = instructions.split('\n');
-
-		// let instructionsList = [];
-		// //
-		// if (e.onKeyUp === 13) {
-		// 	const newInstruction = handleInstructionsArea(e).split(',');
-		// 	instructionsList.push(newInstruction);
-		// 	console.log(newInstruction);
-		// }
 
 		fetch('https://final-project-api-hostin-13b05.web.app/recipes', {
 			method: 'POST',
@@ -67,12 +55,12 @@ export const FormRecipeComponent = () => {
 	const handleRecipeFields = e => {
 		const newRecipeValue =
 			e.target.name === 'picture' ? e.target.file : e.target.value;
-		instructions = handleInstructionFields(e);
+		// instructions = handleInstructionFields(e);
 		setNewRecipe({
 			...newRecipe,
 			[e.target.name]: newRecipeValue,
 			ingredients,
-			instructions,
+			// instructions,
 		});
 	};
 
@@ -96,18 +84,18 @@ export const FormRecipeComponent = () => {
 		setInstructions(e.target.value);
 	};
 
-	const handleInstructionFields = (e, name, index) => {
-		// let instructionsList = emptyInstructions;
-		// instructionsList = e.target.value;
-		// let instructionsList = emptyInstructions;
-		// instructionsList[index][name] = e.target.value;
-		// if (e.onKeyUp === 13) {
-		// 	const newInstruction = instructionsList.split(',');
-		// 	instructionsList.push(newInstruction);
-		// 	console.log(newInstruction);
-		// }
-		// setInstructions(instructionsList);
-	};
+	// const handleInstructionFields = (e, name, index) => {
+	// 	let instructionsList = emptyInstructions;
+	// 	instructionsList = e.target.value;
+	// 	let instructionsList = emptyInstructions;
+	// 	instructionsList[index][name] = e.target.value;
+	// 	if (e.onKeyUp === 13) {
+	// 		const newInstruction = instructionsList.split(',');
+	// 		instructionsList.push(newInstruction);
+	// 		console.log(newInstruction);
+	// 	}
+	// 	setInstructions(instructionsList);
+	// };
 
 	return (
 		<section className={`${classes.formArea}`}>
@@ -128,7 +116,7 @@ export const FormRecipeComponent = () => {
 									required
 								/>
 							</Form.Group>
-							<Form.Group className='mb-3'>
+							{/* <Form.Group className='mb-3'>
 								<Form.Label>Recipe Category</Form.Label>
 								<Form.Control
 									name='category'
@@ -136,7 +124,7 @@ export const FormRecipeComponent = () => {
 									placeholder='Breakfast'
 									onChange={handleRecipeFields}
 								/>
-							</Form.Group>
+							</Form.Group> */}
 							<Form.Group className='mb-3'>
 								<Form.Label>Quick Description</Form.Label>
 								<Form.Control
@@ -156,7 +144,6 @@ export const FormRecipeComponent = () => {
 								<Form.Control
 									name='picture'
 									type='file'
-									value={newRecipe.picture}
 									onChange={handlePictureField}
 								/>
 							</Form.Group>

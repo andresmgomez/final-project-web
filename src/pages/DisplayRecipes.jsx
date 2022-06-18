@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 
 import { BreadcrumbComponent } from '../components/common/Breadcrumb/Breadcrumb';
 import { RecipeCardComponent } from '../components/common/Card/RecipeCard';
@@ -25,15 +25,13 @@ export const DisplayRecipesPage = () => {
 			<section>
 				<Container>
 					<Row>
-						<Col>
-							{!recipes ? (
-								<h3 className='text-center mt-3'>Please Wait...</h3>
-							) : (
-								recipes?.map(recipe => {
-									return <RecipeCardComponent recipe={recipe} />;
-								})
-							)}
-						</Col>
+						{!recipes ? (
+							<h3 className='text-center mt-3'>Please Wait...</h3>
+						) : (
+							recipes?.map(recipe => {
+								return <RecipeCardComponent recipe={recipe} />;
+							})
+						)}
 					</Row>
 				</Container>
 			</section>

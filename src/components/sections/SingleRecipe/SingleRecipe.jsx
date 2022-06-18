@@ -13,7 +13,7 @@ export const SingleRecipeComponent = ({ recipe, recipeId }) => {
 								<h2 className={`${classes.recipeName}`}>{recipe.name}</h2>
 								<div className={`${classes.recipePicture}`}>
 									<img
-										src={recipe.picture}
+										src='https://via.placeholder.com/530x390'
 										alt='How the recipe looks like after it has been prepared'
 									/>
 								</div>
@@ -38,12 +38,6 @@ export const SingleRecipeComponent = ({ recipe, recipeId }) => {
 															ingredient['foodMeasurement']
 														);
 														recipeIngredients.push(foodName, ' ', foodMeasure);
-														// const { foodName, foodMeasurement } =
-														// 	recipe.ingredients[index];
-														// const recipeIngredient = {
-														// 	foodName,
-														// 	foodMeasurement,
-														// };
 
 														return <Form.Control value={recipeIngredients} />;
 													})}
@@ -54,31 +48,13 @@ export const SingleRecipeComponent = ({ recipe, recipeId }) => {
 								</div>
 								<div className={classes.recipeInstructions}>
 									<h3>Instructions</h3>
-									{recipe.instructions.map(instruction => {
+									{recipe.instructions.map((instruction, index) => {
 										return (
-											<p className={`${classes.recipeContent}`}>
-												{instruction}
-											</p>
+											<ol className={`${classes.recipeContent}`}>
+												<li key={index}>{instruction}</li>
+											</ol>
 										);
 									})}
-									{/* <p className={`${classes.recipeContent}`}>
-										{recipe.instructions[1]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[2]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[3]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[4]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[5]}
-									</p>
-									<p className={`${classes.recipeContent}`}>
-										{recipe.instructions[6]}
-									</p> */}
 								</div>
 							</div>
 						</Col>
