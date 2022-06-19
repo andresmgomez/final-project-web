@@ -138,7 +138,10 @@ export const FormRecipeComponent = () => {
 								<Form.Label>Upload a Pic</Form.Label>
 								<ul className={`${classes.recipePic}`}>
 									<li>
-										<img src={previewPicture} />
+										<img
+											src={previewPicture}
+											alt='A preview of an uploaded recipe thumbnail'
+										/>
 									</li>
 								</ul>
 								<Form.Control

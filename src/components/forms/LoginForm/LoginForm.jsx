@@ -43,7 +43,7 @@ export const LoginFormComponent = () => {
 									<Form.Control
 										bsPrefix={`${classes.userFields}`}
 										name='password'
-										type='text'
+										type='password'
 									/>
 								</Form.Group>
 								<Form.Group className='mb-3'>
