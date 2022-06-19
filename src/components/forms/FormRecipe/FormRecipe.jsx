@@ -111,7 +111,7 @@ export const FormRecipeComponent = () => {
 								<Form.Control
 									name='name'
 									type='text'
-									placeholder='Carrot Orange Juice'
+									placeholder='Your favorite recipe name..'
 									onChange={handleRecipeFields}
 									required
 								/>
@@ -210,6 +210,7 @@ export const FormRecipeComponent = () => {
 								<Form.Control
 									as='textarea'
 									style={{ height: '200px' }}
+									placeholder='Write the first step of a recipe, then click "Enter" to jump into the second step on your recipe, and so on...'
 									// onChange={e => handleInstructionFields(e)}
 									onChange={handleInstructionsArea}
 								/>

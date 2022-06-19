@@ -1,18 +1,27 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { SignupFormComponent } from './components/forms/SignupForm/SignupForm';
+import { LoginFormComponent } from './components/forms/LoginForm/LoginForm';
 import { AddRecipePage } from './pages/AddRecipe';
 import { DetailRecipePage } from './pages/DetailRecipe';
 import { DisplayRecipesPage } from './pages/DisplayRecipes';
+import { UserContext } from './context/userContext';
 
 function App() {
+	const [user, setUser] = useState();
 	return (
 		<>
-			<BrowserRouter>
-				<Routes>
-					<Route path='/' element={<DisplayRecipesPage />} />
-					<Route path='/recipes/:recipeId' element={<DetailRecipePage />} />
-					<Route path='/add-recipe' element={<AddRecipePage />} />
-				</Routes>
-			</BrowserRouter>
+			<UserContext.Provider value={{ user, setUser }}>
+				<BrowserRouter>
+					<Routes>
+						<Route path='/signup' element={<SignupFormComponent />} />
+						<Route path='/login' element={<LoginFormComponent />} />
+						<Route path='/' element={<DisplayRecipesPage />} />
+						<Route path='/recipes/:recipeId' element={<DetailRecipePage />} />
+						<Route path='/add-recipe' element={<AddRecipePage />} />
+					</Routes>
+				</BrowserRouter>
+			</UserContext.Provider>
 		</>
 	);
 }

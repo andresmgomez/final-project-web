@@ -1,0 +1,84 @@
+.userArea {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.containerForm {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.containerForm.backgroundForm {
+	background-image: url(../../../public/assets/images/background-form.jpeg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.wrapperForm {
+	width: 450px;
+	padding: 60px 40px 30px 40px;
+	background-color: #f5f5f5;
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.wrapperForm .userForm {
+	justify-content: space-between;
+	flex-wrap: wrap;
+	display: block;
+}
+
+.userForm h1 {
+	padding-bottom: 55px;
+	color: #ffae00;
+	font-size: 30px;
+	font-weight: 700;
+	text-align: center;
+	line-height: 1.2;
+	text-transform: capitalize;
+}
+
+.userForm .userFields {
+	position: relative;
+	padding: 10px;
+	background-color: #e7e0e0;
+	border-style: none;
+	width: 100%;
+	z-index: 1;
+}
+
+.userForm .userIcons {
+	display: absolute;
+	margin-left: 3px;
+	padding-right: 7px;
+	bottom: 0;
+	left: 0;
+	color: #ffae00;
+	font-size: 16px;
+}
+
+.userForm .userBtn {
+	margin-top: -5px;
+	padding: 12px 25px;
+	width: 100%;
+	font-size: 15px;
+	font-weight: 700;
+	background-color: #ffae00;
+	border: 1px solid #ffae00;
+	color: #fff;
+	transition: all 0.3s ease-in-out;
+}
+
+.userForm .userBtn:hover {
+	cursor: pointer;
+	opacity: 0.7;
+}
+
+.userForm .userLinks {
+	font-size: 16px;
+	color: #999;
+	line-height: 1.4;
+}
