@@ -1,13 +1,45 @@
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 
+import { auth } from '../../../App';
 import classes from '../UserForm.module.css';
 
 export const LoginFormComponent = () => {
+	let navigate = useNavigate();
+
+	const [user, setUser] = useState({
+		email: '',
+		password: '',
+	});
+
+	const handleLoginFields = e => {
+		setUser({
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleLoginUser = e => {
+		e.preventDefault();
+		signInWithEmailAndPassword(auth, email, password)
+			.then(() => {
+				fetch(`https://final-project-api-hostin-13b05.web.app/users/userId`, {
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(user),
+				});
+			})
+			.then(res => res.json())
+			.then(data => setUser(data))
+			.then(() => navigate('/'))
+			.catch(err => console.log(err));
+	};
+
 	return (
 		<section className={`${classes.userArea}`}>
 			<Container
@@ -16,7 +48,10 @@ export const LoginFormComponent = () => {
 				<Row>
 					<Col>
 						<div className={`${classes.wrapperForm}`}>
-							<Form className={`${classes.userForm}`}>
+							<Form
+								className={`${classes.userForm}`}
+								onSubmit={handleLoginUser}
+							>
 								<h1>Login</h1>
 								<Form.Group className='mb-3'>
 									<span>
@@ -30,6 +65,7 @@ export const LoginFormComponent = () => {
 										bsPrefix={`${classes.userFields}`}
 										name='username'
 										type='text'
+										onChange={handleLoginFields}
 									/>
 								</Form.Group>
 								<Form.Group className='mb-3'>
@@ -44,6 +80,7 @@ export const LoginFormComponent = () => {
 										bsPrefix={`${classes.userFields}`}
 										name='password'
 										type='password'
+										onChange={handleLoginFields}
 									/>
 								</Form.Group>
 								<Form.Group className='mb-3'>

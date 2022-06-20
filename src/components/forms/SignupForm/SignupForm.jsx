@@ -29,20 +29,19 @@ export const SignupFormComponent = () => {
 		});
 	};
 
-	const handleCreateUser = async (e, { email, password }) => {
+	const handleCreateUser = async e => {
 		e.preventDefault();
-
 		fetch('https://final-project-api-hostin-13b05.web.app/users', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ ...user, email, password }),
+			body: JSON.stringify(user),
 		})
 			.then(res => res.json())
-			// .then(user => createUserWithFirebase(user))
-			.then(data => {
-				if (createUserWithFirebase) {
+			.then(() => {
+				const { email, password } = res;
+				if (createUserWithFirebase(email, password)) {
 					setUser(user, data);
 				}
 			})
