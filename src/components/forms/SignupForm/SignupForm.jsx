@@ -39,10 +39,10 @@ export const SignupFormComponent = () => {
 			body: JSON.stringify(user),
 		})
 			.then(res => res.json())
-			.then(() => {
-				const { email, password } = res;
+			.then(data => {
+				const { email, password } = data;
 				if (createUserWithFirebase(email, password)) {
-					setUser(user, data);
+					setUser({ ...user, data });
 				}
 			})
 			.then(() => navigate('/login'))

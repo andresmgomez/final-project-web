@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
@@ -25,17 +26,22 @@ export const LoginFormComponent = () => {
 
 	const handleLoginUser = e => {
 		e.preventDefault();
-		signInWithEmailAndPassword(auth, email, password)
-			.then(() => {
-				fetch(`https://final-project-api-hostin-13b05.web.app/users/userId`, {
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(user),
-				});
-			})
+		fetch(`https://final-project-api-hostin-13b05.web.app/users/userId`, {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(user),
+		})
 			.then(res => res.json())
-			.then(data => setUser(data))
+			.then(data => {
+				const { email, password } = data;
+				const authUser = signInWithEmailAndPassword(auth, email, password);
+				let loginUser = {
+					email: authUser.email,
+					password: authUser.password,
+				};
+				setUser(loginUser);
+			})
 			.then(() => navigate('/'))
 			.catch(err => console.log(err));
 	};
