@@ -11,7 +11,7 @@ import { DisplayRecipesPage } from './pages/DisplayRecipes';
 
 import { UserContext } from './context/userContext';
 
-import { app } from './firebase.config';
+import { app } from './firebase.config.js';
 export const auth = getAuth(app);
 
 function App() {

@@ -1,46 +1,39 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
+import { auth } from '../../../App.js';
+import { getApps, initializeApp } from 'firebase/app';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { firebaseConfig } from '../../../firebase.config.js';
+
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 
-import { auth } from '../../../App';
 import classes from '../UserForm.module.css';
 
 export const LoginFormComponent = () => {
 	let navigate = useNavigate();
+	const [email, setEmail] = useState(null);
+	const [password, setPassword] = useState(null);
 
 	const [user, setUser] = useState({
-		email: '',
-		password: '',
+		email,
+		password,
 	});
 
-	const handleLoginFields = e => {
-		setUser({
-			[e.target.name]: e.target.value,
-		});
-	};
-
-	const handleLoginUser = e => {
+	const handleSigninUser = e => {
 		e.preventDefault();
-		fetch(`https://final-project-api-hostin-13b05.web.app/users/userId`, {
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(user),
-		})
-			.then(res => res.json())
-			.then(data => {
-				const { email, password } = data;
-				const authUser = signInWithEmailAndPassword(auth, email, password);
-				let loginUser = {
-					email: authUser.email,
-					password: authUser.password,
-				};
-				setUser(loginUser);
+
+		if (getApps().length === 0) {
+			initializeApp(firebaseConfig);
+		}
+
+		signInWithEmailAndPassword(auth, email, password)
+			.then(response => {
+				setUser(response.user);
+				console.log(user.email, user.password);
 			})
 			.then(() => navigate('/'))
 			.catch(err => console.log(err));
@@ -56,7 +49,7 @@ export const LoginFormComponent = () => {
 						<div className={`${classes.wrapperForm}`}>
 							<Form
 								className={`${classes.userForm}`}
-								onSubmit={handleLoginUser}
+								onSubmit={handleSigninUser}
 							>
 								<h1>Login</h1>
 								<Form.Group className='mb-3'>
@@ -66,12 +59,12 @@ export const LoginFormComponent = () => {
 											className={`${classes.userIcons}`}
 										/>
 									</span>
-									<Form.Label>Username</Form.Label>
+									<Form.Label>Email</Form.Label>
 									<Form.Control
 										bsPrefix={`${classes.userFields}`}
-										name='username'
-										type='text'
-										onChange={handleLoginFields}
+										name='email'
+										type='email'
+										onChange={e => setEmail(e.target.value)}
 									/>
 								</Form.Group>
 								<Form.Group className='mb-3'>
@@ -86,11 +79,13 @@ export const LoginFormComponent = () => {
 										bsPrefix={`${classes.userFields}`}
 										name='password'
 										type='password'
-										onChange={handleLoginFields}
+										onChange={e => setPassword(e.target.value)}
 									/>
 								</Form.Group>
 								<Form.Group className='mb-3'>
-									<Button bsPrefix={`${classes.userBtn}`}>Login</Button>
+									<Button type='submit' bsPrefix={`${classes.userBtn}`}>
+										Login
+									</Button>
 								</Form.Group>
 								<Form.Group className='mb-3'>
 									<div className={`text-center ${classes.userLinks}`}>
