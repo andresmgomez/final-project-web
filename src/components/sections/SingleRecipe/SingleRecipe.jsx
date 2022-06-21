@@ -31,13 +31,11 @@ export const SingleRecipeComponent = ({ recipe, recipeId }) => {
 												>
 													{recipe.ingredients.map(ingredient => {
 														let recipeIngredients = [];
-														const foodName = JSON.stringify(
-															ingredient['foodName']
-														);
-														const foodMeasure = JSON.stringify(
+														recipeIngredients.push(
+															ingredient['foodName'],
+															' ',
 															ingredient['foodMeasurement']
 														);
-														recipeIngredients.push(foodName, ' ', foodMeasure);
 
 														return <Form.Control value={recipeIngredients} />;
 													})}
@@ -48,13 +46,11 @@ export const SingleRecipeComponent = ({ recipe, recipeId }) => {
 								</div>
 								<div className={classes.recipeInstructions}>
 									<h3>Instructions</h3>
-									{recipe.instructions.map((instruction, index) => {
-										return (
-											<ol className={`${classes.recipeContent}`}>
-												<li key={index}>{instruction}</li>
-											</ol>
-										);
-									})}
+									<ol className={`${classes.recipeContent}`}>
+										{recipe.instructions.map((instruction, index) => {
+											return <li key={index}>{instruction}</li>;
+										})}
+									</ol>
 								</div>
 							</div>
 						</Col>

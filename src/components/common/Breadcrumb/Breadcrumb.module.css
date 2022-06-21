@@ -3,9 +3,9 @@
 	padding: 9.2rem 0;
 	background-image: radial-gradient(
 			rgba(255, 166, 0, 0.8),
-			rgb(255, 174, 0, 0.9)
+			rgb(255, 174, 0, 0.6)
 		),
-		url('https://via.placeholder.com/1920x234');
+		url(../../../../public/assets/images/background-banner.jpeg);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;

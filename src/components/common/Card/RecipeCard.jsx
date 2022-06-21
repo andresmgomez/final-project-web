@@ -2,6 +2,8 @@ import { Col, Figure } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import classes from './RecipeCard.module.css';
 
+import recipeImage from '../../../images/background-recipe.jpeg';
+
 export const RecipeCardComponent = ({ recipe }) => {
 	let navigate = useNavigate();
 	return (
@@ -11,7 +13,7 @@ export const RecipeCardComponent = ({ recipe }) => {
 					<Figure.Image
 						width={530}
 						height={390}
-						src='https://via.placeholder.com/530x390'
+						src={recipeImage}
 						onClick={() => navigate(`/recipes/${recipe._id}`)}
 					/>
 					<div className={`${classes.singleRecipe}`}>
